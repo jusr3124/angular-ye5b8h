@@ -10,17 +10,19 @@ import { FormBuilder } from '@angular/forms';
 export class CartComponent implements OnInit {
   items;
   checkoutForm;
+  totalPrice : Number;
 
   constructor(
     private cartService: CartService,
     private formBuilder: FormBuilder
   ) {
-    this.items = this.cartService.getItems();
+    // this.items = this.cartService.getItems();
 
     this.checkoutForm = this.formBuilder.group({
       name: '',
       address: ''
     })
+    
   }
 
   onSubmit(customerData) {
@@ -34,4 +36,8 @@ export class CartComponent implements OnInit {
     this.items = this.cartService.getItems();
   }
 
+  getPriceItems() {
+    this.totalPrice = this.cartService.getTotal();
+    console.log('1: ' + this.totalPrice);
+  }
 }

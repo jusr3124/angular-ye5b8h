@@ -8,6 +8,9 @@
     <span>{{item.name}}</span>
     <span>{{item.price | currency}}</span>
 </div>
+<span>{{getPriceItems() | currency}}</span>
+
+<span>Total price: {{totalPrice | currency}}</span>
 
 <form [formGroup]="checkoutForm" (ngSumbit)="onSubmit(checkoutForm.value)">
     <div>
@@ -22,6 +25,6 @@
         </label>
         <input id="address" type="text" formControlName="address">
     </div>
-    
+
     <button class="button" type="submit">Purchase</button>
 </form>
