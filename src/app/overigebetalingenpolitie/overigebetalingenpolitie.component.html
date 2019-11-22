@@ -1,0 +1,19 @@
+<h2>Bestuurlijke boetes</h2>
+<form (ngSubmit)="submit()" [formGroup]="bestuurlijkeBoetesForm">
+    <div>
+        <label>BB: </label>
+        <input formControlName="bbField" readonly>
+    </div>
+    <div>
+        <label>Eenheidscode: </label>
+        <select class="form-control" formControlName="eenheidscodeField" required>
+            <option *ngFor="let eenheidscode of eenheidscodeList" [value]="eenheidscode">{{eenheidscode}}</option>
+        </select>
+    </div>
+    <div>
+        <label>BVEH-volgnummer: </label>
+        <input type="number" formControlName="bvhVolgnummerField" type="text" placeholder="000" maxlength="14"
+            inputmode="numeric" pattern="[0-9]*" digitOnly required>
+    </div>
+    <button type="submit(), reset()">Bevestig</button>
+</form>

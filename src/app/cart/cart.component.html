@@ -12,19 +12,17 @@
 
 <span>Total price: {{totalPrice | currency}}</span>
 
-<form [formGroup]="checkoutForm" (ngSumbit)="onSubmit(checkoutForm.value)">
+<form [formGroup]="checkoutForm" (ngSumbit)="register()">
     <div>
-        <label for="name">
-            Name: 
-        </label>
-        <input id="name" type="text" formControlName="name">
+        <label for="name"> Name: </label>
+        <input id="nameId" type="text" formControlName="name" required>
+        <small *ngIf="checkoutForm.get('name').dirty && checkoutForm.get('name').hasError('required')">Name is required</small>
+        <small *ngIf="checkoutForm.get('name').dirty && checkoutForm.get('name').hasError('minlength')">Name should contains at least 3 characters </small>
+        <div>
+            <label for="address"> Address: </label>
+            <input id="addressId" type="text" formControlName="address">
+            <small *ngIf="checkoutForm.get('address').dirty && checkoutForm.get('address').hasError('required')">Address is required</small>
+        </div>
+        <button class="button" type="submit" [disabled]="checkoutForm.invalid">Purchase</button>
     </div>
-    <div>
-        <label for="address">
-            Address: 
-        </label>
-        <input id="address" type="text" formControlName="address">
-    </div>
-
-    <button class="button" type="submit">Purchase</button>
 </form>

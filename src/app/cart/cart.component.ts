@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { CartService } from '../cart.service';
-import { FormBuilder } from '@angular/forms';
+import { FormBuilder, Validators, FormControl, FormGroup } from '@angular/forms';
 
 @Component({
   selector: 'app-cart',
@@ -9,8 +9,10 @@ import { FormBuilder } from '@angular/forms';
 })
 export class CartComponent implements OnInit {
   items;
-  checkoutForm;
-  totalPrice : Number;
+  checkoutForm: FormGroup;
+  totalPrice: Number;
+  name: FormControl;
+  address: FormControl;
 
   constructor(
     private cartService: CartService,
@@ -19,10 +21,15 @@ export class CartComponent implements OnInit {
     // this.items = this.cartService.getItems();
 
     this.checkoutForm = this.formBuilder.group({
-      name: '',
-      address: ''
+      name: formBuilder.control('', [Validators.required, Validators.minLength(3)]),
+      address: formBuilder.control('', [Validators.required])
     })
-    
+
+  }
+
+  register() {
+    console.log(this.checkoutForm.value);
+    window.alert('Purchased!');
   }
 
   onSubmit(customerData) {
@@ -38,6 +45,5 @@ export class CartComponent implements OnInit {
 
   getPriceItems() {
     this.totalPrice = this.cartService.getTotal();
-    console.log('1: ' + this.totalPrice);
   }
 }
