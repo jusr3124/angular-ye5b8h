@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { stringify } from 'querystring';
 
@@ -8,8 +8,12 @@ import { stringify } from 'querystring';
   styleUrls: ['./overigebetalingenpolitie.component.css']
 })
 export class OverigebetalingenpolitieComponent implements OnInit {
+  zero = 0;
   maxLength = 14;
   bestuurlijkeBoetesForm: FormGroup;
+  bbField;
+  bvehVolgnummerField;
+  eenheidscodeField;
   eenheidscodeList = [
     'PL0100	Noord-Nederland',
     'PL0600	Oost-Nederland',
@@ -30,27 +34,52 @@ export class OverigebetalingenpolitieComponent implements OnInit {
     this.bestuurlijkeBoetesForm = fb.group({
       bbField: fb.control('BB', [Validators.required]),
       eenheidscodeField: fb.control('', [Validators.required]),
-      bvhVolgnummerField: fb.control('', [Validators.required, Validators.maxLength(this.maxLength), Validators.min(0)])
+      bvehVolgnummerField: fb.control('', [
+        Validators.required,
+        Validators.maxLength(this.maxLength),
+        Validators.minLength(1)
+      ]),
     })
   }
 
   submit() {
-    this.bestuurlijkeBoetesForm.controls['bvhVolgnummerField'].setValue(this.addingLeadingZeros(this.bestuurlijkeBoetesForm.controls['bvhVolgnummerField'].value));
-    this.bestuurlijkeBoetesForm.value;
+    this.bestuurlijkeBoetesForm.controls['eenheidscodeField'].setValue(
+      this.bestuurlijkeBoetesForm.controls['eenheidscodeField'].value.substring(0, 6)
+    );
+    this.bestuurlijkeBoetesForm.controls['bvehVolgnummerField'].setValue(
+      this.addLeadingZerosbvehVolgnummer(this.bestuurlijkeBoetesForm.controls['bvehVolgnummerField'].value)
+    );
     console.log(this.bestuurlijkeBoetesForm.value);
   }
- 
-  addingLeadingZeros(num) {
-    var s = num + "";
-    console.log("1: " + num)
-    while (s.length < this.maxLength){
-       s = "0" + s;
+
+  concatEenheidscode() {
+    this.bestuurlijkeBoetesForm.controls['eenheidscodeField'].value.substring(0, 6);
+  }
+
+  addLeadingZerosbvehVolgnummer(num: any) {
+    if (num == null || num == 'null') {
+      num = '0';
+      this.addLeadingZerosbvehVolgnummer(num);
     }
-    console.log("2: " + s);
+    var checkOnlyDigits = this.checkOnlyDigits(num);
+    var s = checkOnlyDigits + '';
+    while (s.length < this.maxLength) {
+      s = this.zero + s;
+    }
     return s;
   }
 
-  ngOnInit() {
+  checkOnlyDigits(input: string) {
+    for (let i = input.length - 1; i >= 0; i--) {
+      const d = input.charCodeAt(i);
+      if (d < 48 || d > 57) return 0;
+    }
+    return input;
   }
 
+  ngOnInit() {
+    this.bbField = this.bestuurlijkeBoetesForm.controls['bbField'].value;
+    this.eenheidscodeField = this.bestuurlijkeBoetesForm.controls['eenheidscodeField'].value;
+    this.bvehVolgnummerField = this.bestuurlijkeBoetesForm.controls['bvehVolgnummerField'].value;
+  }
 }

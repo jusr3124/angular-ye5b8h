@@ -7,13 +7,14 @@
     <div>
         <label>Eenheidscode: </label>
         <select class="form-control" formControlName="eenheidscodeField" required>
-            <option *ngFor="let eenheidscode of eenheidscodeList" [value]="eenheidscode">{{eenheidscode}}</option>
+            <option *ngFor="let eenheidscode of eenheidscodeList" [value]="eenheidscode">
+                {{eenheidscode}}</option>
         </select>
     </div>
     <div>
         <label>BVEH-volgnummer: </label>
-        <input type="number" formControlName="bvhVolgnummerField" type="text" placeholder="000" maxlength="14"
-            inputmode="numeric" pattern="[0-9]*" digitOnly required>
+        <input type="text" formControlName="bvehVolgnummerField" placeholder="000" maxlength="14"
+            inputmode="numeric" pattern="[0-9]" numericType="number" digitOnly required>
     </div>
-    <button type="submit(), reset()">Bevestig</button>
+    <button type="submit()">Bevestig</button>
 </form>

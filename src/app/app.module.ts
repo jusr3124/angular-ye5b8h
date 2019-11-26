@@ -12,6 +12,7 @@ import { ProductDetailsComponent } from './product-details/product-details.compo
 import { CartComponent } from './cart/cart.component';
 import { ShippingComponent } from './shipping/shipping.component';
 import { OverigebetalingenpolitieComponent } from './overigebetalingenpolitie/overigebetalingenpolitie.component';
+import { TestAppComponent } from './test-app/test-app.component';
 
 @NgModule({
   imports: [
@@ -23,7 +24,8 @@ import { OverigebetalingenpolitieComponent } from './overigebetalingenpolitie/ov
       { path: 'products/:productId', component: ProductDetailsComponent },
       { path: 'cart', component: CartComponent },
       { path: 'shipping', component: ShippingComponent },
-      { path: 'overigebetalingenpolitie', component: OverigebetalingenpolitieComponent }
+      { path: 'overigebetalingenpolitie', component: OverigebetalingenpolitieComponent },
+      { path: 'app-test-app', component: TestAppComponent }
     ])
   ],
   declarations: [
@@ -34,7 +36,8 @@ import { OverigebetalingenpolitieComponent } from './overigebetalingenpolitie/ov
     ProductDetailsComponent,
     CartComponent,
     ShippingComponent,
-    OverigebetalingenpolitieComponent
+    OverigebetalingenpolitieComponent,
+    TestAppComponent
   ],
   bootstrap: [AppComponent]
 })
