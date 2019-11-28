@@ -1,3 +1,15 @@
 <div>
     <h2>Hello</h2>
+    <p>{{name}}</p>
+    <select>
+        <option *ngFor="let hallo of hallos" [value]="hallo" (click)="onInputEntry($event, input2)">
+            {{hallo}}
+        </option>
+    </select>
+    <input #input1 type="text" maxlength="2" size="2" (input)="onInputEntry($event, input2)" />
+    -
+    <input #input2 type="text" maxlength="2" size="2" />
+
+
+    <div> Some other content </div>
 </div>

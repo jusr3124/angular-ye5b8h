@@ -1,20 +1,28 @@
 <h2>Bestuurlijke boetes</h2>
 <form (ngSubmit)="submit()" [formGroup]="bestuurlijkeBoetesForm">
     <div>
-        <label>BB: </label>
+        <label>BB: <span class="requiredRed">*</span> </label>
         <input formControlName="bbField" readonly>
     </div>
     <div>
-        <label>Eenheidscode: </label>
-        <select class="form-control" formControlName="eenheidscodeField" required>
-            <option *ngFor="let eenheidscode of eenheidscodeList" [value]="eenheidscode">
+        <label>Eenheidscode: <span class="requiredRed">*</span> </label>
+        <select formControlName="eenheidscodeField">
+            <option *ngFor="let eenheidscode of eenheidscodeList" [value]="eenheidscode" (click)="focusToNextInput()">
                 {{eenheidscode}}</option>
         </select>
     </div>
     <div>
-        <label>BVEH-volgnummer: </label>
-        <input type="text" formControlName="bvehVolgnummerField" placeholder="000" maxlength="14"
-            inputmode="numeric" pattern="[0-9]" numericType="number" digitOnly required>
+        <label>BVH-volgnummer: <span class="requiredRed">*</span> </label>
+        <input #focusNextField type="text" formControlName="bvhVolgnummerField" pattern="[0-9]+" maxlength="14"
+            (keypress)="numberOnly($event)">
+        <small class="requiredRed"
+            *ngIf="bestuurlijkeBoetesForm.get('bvhVolgnummerField').invalid 
+        && (bestuurlijkeBoetesForm.get('bvhVolgnummerField').dirty || bestuurlijkeBoetesForm.get('bvhVolgnummerField').touched)">
+            BVH-volgnummer is verplicht</small>
     </div>
-    <button type="submit()">Bevestig</button>
+    <button type="submit()" [disabled]="bestuurlijkeBoetesForm.invalid">Bevestig</button>
 </form>
+
+<div>
+    {{bestuurlijkeBoetesForm.value | json}}
+</div>

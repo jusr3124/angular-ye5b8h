@@ -13,6 +13,8 @@ import { CartComponent } from './cart/cart.component';
 import { ShippingComponent } from './shipping/shipping.component';
 import { OverigebetalingenpolitieComponent } from './overigebetalingenpolitie/overigebetalingenpolitie.component';
 import { TestAppComponent } from './test-app/test-app.component';
+import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
+import { VisumaanvragenComponent } from './visumaanvragen/visumaanvragen.component';
 
 @NgModule({
   imports: [
@@ -25,7 +27,9 @@ import { TestAppComponent } from './test-app/test-app.component';
       { path: 'cart', component: CartComponent },
       { path: 'shipping', component: ShippingComponent },
       { path: 'overigebetalingenpolitie', component: OverigebetalingenpolitieComponent },
-      { path: 'app-test-app', component: TestAppComponent }
+      { path: 'test-app', component: TestAppComponent },
+      { path: 'visumaanvragen', component: VisumaanvragenComponent },
+      { path: '**', component: PageNotFoundComponent }
     ])
   ],
   declarations: [
@@ -37,7 +41,9 @@ import { TestAppComponent } from './test-app/test-app.component';
     CartComponent,
     ShippingComponent,
     OverigebetalingenpolitieComponent,
-    TestAppComponent
+    TestAppComponent,
+    PageNotFoundComponent,
+    VisumaanvragenComponent
   ],
   bootstrap: [AppComponent]
 })
