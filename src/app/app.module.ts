@@ -15,6 +15,7 @@ import { OverigebetalingenpolitieComponent } from './overigebetalingenpolitie/ov
 import { TestAppComponent } from './test-app/test-app.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { VisumaanvragenComponent } from './visumaanvragen/visumaanvragen.component';
+import { TegenonderzoekArtikelAchtComponent } from './tegenonderzoek-artikel-acht/tegenonderzoek-artikel-acht.component';
 
 @NgModule({
   imports: [
@@ -29,6 +30,7 @@ import { VisumaanvragenComponent } from './visumaanvragen/visumaanvragen.compone
       { path: 'overigebetalingenpolitie', component: OverigebetalingenpolitieComponent },
       { path: 'test-app', component: TestAppComponent },
       { path: 'visumaanvragen', component: VisumaanvragenComponent },
+      { path: 'tegenonderzoek-artikel-acht', component: TegenonderzoekArtikelAchtComponent },
       { path: '**', component: PageNotFoundComponent }
     ])
   ],
@@ -43,7 +45,8 @@ import { VisumaanvragenComponent } from './visumaanvragen/visumaanvragen.compone
     OverigebetalingenpolitieComponent,
     TestAppComponent,
     PageNotFoundComponent,
-    VisumaanvragenComponent
+    VisumaanvragenComponent,
+    TegenonderzoekArtikelAchtComponent
   ],
   bootstrap: [AppComponent]
 })
