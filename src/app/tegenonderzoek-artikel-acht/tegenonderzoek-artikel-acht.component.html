@@ -1,1 +1,63 @@
-<p>tegenonderzoek-artikel-acht works!</p>
+<h2>Tegenonderzoek WvW</h2>
+<form (ngSubmit)="submit()" [formGroup]="tegenonderzoekArtikelAchtForm">
+    <div>
+        <label>8 WvW:
+            <span class="requiredRed">
+                *
+            </span>
+        </label>
+        <input formControlName="eightWvwField" readonly>
+    </div>
+    <div>
+        <label>Eenheidscode:
+            <span class="requiredRed">
+                *
+            </span>
+        </label>
+        <select formControlName="eenheidscodeField">
+            <option value="" selected>- selecteer een eenheidscode -</option>
+            <option *ngFor="let eenheidscode of eenheidscodeList" [value]="eenheidscode | slice:0:6"
+                (click)="focusToNextInput()">
+                {{eenheidscode}}
+            </option>
+        </select>
+        <small class="requiredRed"
+            *ngIf="tegenonderzoekArtikelAchtForm.get('eenheidscodeField').invalid 
+        && (tegenonderzoekArtikelAchtForm.get('eenheidscodeField').dirty || tegenonderzoekArtikelAchtForm.get('eenheidscodeField').touched)">
+            Eenheidscode is verplicht
+        </small>
+    </div>
+    <div>
+        <label>
+            BVH-volgnummer:
+            <span class="requiredRed">
+                *
+            </span>
+        </label>
+        <input #focusNextField type="text" formControlName="bvhVolgnummerField" maxlength="14"
+            (keypress)="numberOnly($event)">
+        <small class="requiredRed"
+            *ngIf="tegenonderzoekArtikelAchtForm.get('bvhVolgnummerField').invalid 
+        && (tegenonderzoekArtikelAchtForm.get('bvhVolgnummerField').dirty || tegenonderzoekArtikelAchtForm.get('bvhVolgnummerField').touched)">
+            BVH-volgnummer is verplicht
+        </small>
+    </div>
+    <div>
+        <label>
+            Goedvolgnummer:
+        </label>
+        <input #focusNextField type="text" formControlName="goedvolgnummerField">
+    </div>
+    <button type="submit()" [disabled]="tegenonderzoekArtikelAchtForm.invalid">
+        Bevestig
+    </button>
+</form>
+
+<br>
+<div>
+    {{tegenonderzoekArtikelAchtForm.value | json}}
+</div>
+<br>
+<div class="requiredRed">
+    {{completeInformation}}
+</div>

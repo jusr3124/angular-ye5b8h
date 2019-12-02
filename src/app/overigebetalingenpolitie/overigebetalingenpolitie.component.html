@@ -1,28 +1,57 @@
 <h2>Bestuurlijke boetes</h2>
 <form (ngSubmit)="submit()" [formGroup]="bestuurlijkeBoetesForm">
     <div>
-        <label>BB: <span class="requiredRed">*</span> </label>
+        <label>BB:
+            <span class="requiredRed">
+                *
+            </span>
+        </label>
         <input formControlName="bbField" readonly>
     </div>
     <div>
-        <label>Eenheidscode: <span class="requiredRed">*</span> </label>
+        <label>Eenheidscode:
+            <span class="requiredRed">
+                *
+            </span>
+        </label>
         <select formControlName="eenheidscodeField">
-            <option *ngFor="let eenheidscode of eenheidscodeList" [value]="eenheidscode" (click)="focusToNextInput()">
-                {{eenheidscode}}</option>
+            <option value="" selected>- selecteer een eenheidscode -</option>
+            <option *ngFor="let eenheidscode of eenheidscodeList" [value]="eenheidscode | slice:0:6"
+                (click)="focusToNextInput()">
+                {{eenheidscode}}
+            </option>
         </select>
+        <small class="requiredRed"
+            *ngIf="bestuurlijkeBoetesForm.get('eenheidscodeField').invalid 
+        && (bestuurlijkeBoetesForm.get('eenheidscodeField').dirty || bestuurlijkeBoetesForm.get('eenheidscodeField').touched)">
+            Eenheidscode is verplicht
+        </small>
     </div>
     <div>
-        <label>BVH-volgnummer: <span class="requiredRed">*</span> </label>
-        <input #focusNextField type="text" formControlName="bvhVolgnummerField" pattern="[0-9]+" maxlength="14"
+        <label>
+            BVH-volgnummer:
+            <span class="requiredRed">
+                *
+            </span>
+        </label>
+        <input #focusNextField type="text" formControlName="bvhVolgnummerField" maxlength="12"
             (keypress)="numberOnly($event)">
         <small class="requiredRed"
             *ngIf="bestuurlijkeBoetesForm.get('bvhVolgnummerField').invalid 
         && (bestuurlijkeBoetesForm.get('bvhVolgnummerField').dirty || bestuurlijkeBoetesForm.get('bvhVolgnummerField').touched)">
-            BVH-volgnummer is verplicht</small>
+            BVH-volgnummer is verplicht
+        </small>
     </div>
-    <button type="submit()" [disabled]="bestuurlijkeBoetesForm.invalid">Bevestig</button>
+    <button type="submit()" [disabled]="bestuurlijkeBoetesForm.invalid">
+        Bevestig
+    </button>
 </form>
 
+<br>
 <div>
     {{bestuurlijkeBoetesForm.value | json}}
+</div>
+<br>
+<div class="requiredRed">
+    {{completeInformation}}
 </div>

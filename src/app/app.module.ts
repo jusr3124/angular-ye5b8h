@@ -16,6 +16,7 @@ import { TestAppComponent } from './test-app/test-app.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { VisumaanvragenComponent } from './visumaanvragen/visumaanvragen.component';
 import { TegenonderzoekArtikelAchtComponent } from './tegenonderzoek-artikel-acht/tegenonderzoek-artikel-acht.component';
+import { ConcatFirstSixCharPipe } from './pipe/concat-first-six-char.pipe';
 
 @NgModule({
   imports: [
@@ -46,7 +47,8 @@ import { TegenonderzoekArtikelAchtComponent } from './tegenonderzoek-artikel-ach
     TestAppComponent,
     PageNotFoundComponent,
     VisumaanvragenComponent,
-    TegenonderzoekArtikelAchtComponent
+    TegenonderzoekArtikelAchtComponent,
+    ConcatFirstSixCharPipe,
   ],
   bootstrap: [AppComponent]
 })
