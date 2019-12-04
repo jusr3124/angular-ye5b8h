@@ -6,7 +6,8 @@
                 *
             </span>
         </label>
-        <input type="text" formControlName="visumKwitantieNummerField" maxlength="15" (blur)="methodAddLeadingZeros()" autofocus>
+        <input type="text" formControlName="visumKwitantieNummerField" maxlength="15" (blur)="methodAddLeadingZeros()"
+            autofocus>
         <small class="requiredRed"
             *ngIf="visumaanvragenForm.get('visumKwitantieNummerField').invalid
         && (visumaanvragenForm.get('visumKwitantieNummerField').dirty || visumaanvragenForm.get('visumKwitantieNummerField').touched)">
