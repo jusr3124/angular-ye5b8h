@@ -17,7 +17,7 @@
         <select formControlName="eenheidscodeField">
             <option value="" selected>- selecteer een eenheidscode -</option>
             <option *ngFor="let eenheidscode of eenheidscodeList" [value]="eenheidscode | slice:0:6"
-                (click)="focusToNextInput()">
+                (click)="focusToInputBvhVolgnummer()">
                 {{eenheidscode}}
             </option>
         </select>
@@ -34,8 +34,12 @@
                 *
             </span>
         </label>
-        <input #focusNextField type="text" formControlName="bvhVolgnummerField" maxlength="14"
-            (keypress)="numberOnly($event)">
+        <input #focusBvhVolgnummerField type="text" formControlName="bvhVolgnummerField" maxlength="14"
+            (keypress)="numberOnly($event)"  
+            (blur)="methodAddLeadingZerosbvehVolgnummer()"
+            (keypress)="focusToInputGoedvolgnummer()"
+            [value]="20"
+            >
         <small class="requiredRed"
             *ngIf="tegenonderzoekArtikelAchtForm.get('bvhVolgnummerField').invalid 
         && (tegenonderzoekArtikelAchtForm.get('bvhVolgnummerField').dirty || tegenonderzoekArtikelAchtForm.get('bvhVolgnummerField').touched)">
@@ -46,7 +50,8 @@
         <label>
             Goedvolgnummer:
         </label>
-        <input #focusNextField type="text" formControlName="goedvolgnummerField">
+        <input #focusGoedvolgnummerField type="text" formControlName="goedvolgnummerField" maxlength="2"
+            (keypress)="numberOnly($event)">
     </div>
     <button type="submit()" [disabled]="tegenonderzoekArtikelAchtForm.invalid">
         Bevestig

@@ -34,8 +34,10 @@
                 *
             </span>
         </label>
-        <input #focusNextField type="text" formControlName="bvhVolgnummerField" maxlength="12"
-            (keypress)="numberOnly($event)">
+        <input #focusNextField type="text" formControlName="bvhVolgnummerField" maxlength="14"
+            (keypress)="numberOnly($event)" 
+            (blur)="methodAddLeadingZerosbvehVolgnummer()" 
+            [value]="20">
         <small class="requiredRed"
             *ngIf="bestuurlijkeBoetesForm.get('bvhVolgnummerField').invalid 
         && (bestuurlijkeBoetesForm.get('bvhVolgnummerField').dirty || bestuurlijkeBoetesForm.get('bvhVolgnummerField').touched)">
