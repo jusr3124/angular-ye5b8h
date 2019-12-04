@@ -18,6 +18,7 @@ import { VisumaanvragenComponent } from './visumaanvragen/visumaanvragen.compone
 import { TegenonderzoekArtikelAchtComponent } from './tegenonderzoek-artikel-acht/tegenonderzoek-artikel-acht.component';
 import { ConcatFirstSixCharPipe } from './pipe/concat-first-six-char.pipe';
 import { NgbModule, NgbAlertModule } from '@ng-bootstrap/ng-bootstrap';
+import { MatSliderModule } from '@angular/material/slider';
 
 @NgModule({
   imports: [
@@ -26,6 +27,7 @@ import { NgbModule, NgbAlertModule } from '@ng-bootstrap/ng-bootstrap';
     ReactiveFormsModule,
     NgbModule,
     NgbAlertModule,
+    MatSliderModule,
     RouterModule.forRoot([
       { path: '', component: ProductListComponent },
       { path: 'products/:productId', component: ProductDetailsComponent },
