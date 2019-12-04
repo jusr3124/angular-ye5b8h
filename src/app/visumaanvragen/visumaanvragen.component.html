@@ -6,17 +6,18 @@
                 *
             </span>
         </label>
-        <input type="text" formControlName="visumKwitantieNummerField" maxlength="15" (blur)="methodAddLeadingZeros()" autofocus>
+        <input type="text" formControlName="visumKwitantieNummerField" maxlength="15" (blur)="methodAddLeadingZeros()"
+            autofocus>
         <small class="requiredRed"
             *ngIf="visumaanvragenForm.get('visumKwitantieNummerField').invalid
         && (visumaanvragenForm.get('visumKwitantieNummerField').dirty || visumaanvragenForm.get('visumKwitantieNummerField').touched)">
             Visum kwitantienummer is ongeldig.
         </small>
 
-        <button type="submit()" [disabled]="visumaanvragenForm.invalid">
-            Bevestig
-        </button>
     </div>
+    <button type="submit()" [disabled]="visumaanvragenForm.invalid">
+        Bevestig
+    </button>
     <!-- <button mat-button (click)="openDialog()">Bevestig</button> -->
 
 </form>
