@@ -17,17 +17,12 @@ import { PageNotFoundComponent } from './page-not-found/page-not-found.component
 import { VisumaanvragenComponent } from './visumaanvragen/visumaanvragen.component';
 import { TegenonderzoekArtikelAchtComponent } from './tegenonderzoek-artikel-acht/tegenonderzoek-artikel-acht.component';
 import { ConcatFirstSixCharPipe } from './pipe/concat-first-six-char.pipe';
-import { NgbModule, NgbAlertModule } from '@ng-bootstrap/ng-bootstrap';
-import { MatSliderModule } from '@angular/material/slider';
 
 @NgModule({
   imports: [
     BrowserModule,
     HttpClientModule,
     ReactiveFormsModule,
-    NgbModule,
-    NgbAlertModule,
-    MatSliderModule,
     RouterModule.forRoot([
       { path: '', component: ProductListComponent },
       { path: 'products/:productId', component: ProductDetailsComponent },

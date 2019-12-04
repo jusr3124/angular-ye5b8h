@@ -16,7 +16,7 @@ export class VisumaanvragenComponent implements OnInit {
   zero: number = 0;
   completeInformation: string;
 
-  constructor(public dialog: MatDialog) {
+  constructor() {
     this.visumaanvragenForm = new FormGroup({
       visumKwitantieNummerField: new FormControl(
         '', [
@@ -31,14 +31,6 @@ export class VisumaanvragenComponent implements OnInit {
   ngOnInit() {
     this.visumKwitantieNummerField =
       this.visumaanvragenForm.controls['visumKwitantieNummerField'].value;
-  }
-
-  openDialog() {
-    const dialogRef = this.dialog.open(DialogContentExampleDialog);
-
-    dialogRef.afterClosed().subscribe(result => {
-      console.log(`Dialog result: ${result}`);
-    });
   }
 
   submit() {
@@ -60,9 +52,3 @@ export class VisumaanvragenComponent implements OnInit {
     return s;
   }
 }
-
-@Component({
-  selector: 'masker-visumaanvragen',
-  templateUrl: 'masker-visumaanvragen.html',
-})
-export class DialogContentExampleDialog {} 
