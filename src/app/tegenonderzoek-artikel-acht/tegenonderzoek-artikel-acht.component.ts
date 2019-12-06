@@ -1,12 +1,13 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { AfterViewInit } from '@angular/core';
 
 @Component({
   selector: 'app-tegenonderzoek-artikel-acht',
   templateUrl: './tegenonderzoek-artikel-acht.component.html',
   styleUrls: ['./tegenonderzoek-artikel-acht.component.css']
 })
-export class TegenonderzoekArtikelAchtComponent implements OnInit {
+export class TegenonderzoekArtikelAchtComponent implements OnInit, AfterViewInit {
 
   @ViewChild('focusBvhVolgnummerField', { static: false }) searchElementBvhVolgnummerField: ElementRef;
   @ViewChild('focusGoedvolgnummerField', { static: false }) searchGoedvolgnummerField: ElementRef;
@@ -17,14 +18,18 @@ export class TegenonderzoekArtikelAchtComponent implements OnInit {
   bvhVolgnummerField: FormControl;
   goedvolgnummerField: FormControl;
 
-  focusedBvhVolgnummer: boolean = false;
-  focusedGoedvolgnummer: boolean = false;
-  isDisabled: boolean = true;
-  zero: number = 0;
-  maxLength: number = 14;
-  underscore: string = '_';
+  focusedBvhVolgnummer = false;
+  focusedGoedvolgnummer = false;
+  isDisabled = true;
+  zero = 0;
+  maxLength = 14;
+  underscore = '_';
   completeInformation: string;
-
+  eightWvwFieldValue = 'eightWvwField';
+  eenheidscodeFieldValue = 'eenheidscodeField';
+  bvhVolgnummerFieldValue = 'bvhVolgnummerField';
+  goedvolgnummerFieldValue = 'goedvolgnummerField';
+  enableValue = 'enable';
 
   eenheidscodeList = [
     //   {code:'PL0100',region:'Noord-Nederland'},
@@ -71,18 +76,18 @@ export class TegenonderzoekArtikelAchtComponent implements OnInit {
         { value: '', disabled: this.isDisabled },
         [Validators.maxLength(2)]
       ),
-    })
+    });
   }
 
   ngOnInit() {
     this.eightWvwField =
-      this.tegenonderzoekArtikelAchtForm.controls['eightWvwField'].value;
+      this.tegenonderzoekArtikelAchtForm.controls[this.eightWvwFieldValue].value;
     this.eenheidscodeField =
-      this.tegenonderzoekArtikelAchtForm.controls['eenheidscodeField'].value;
+      this.tegenonderzoekArtikelAchtForm.controls[this.eenheidscodeFieldValue].value;
     this.bvhVolgnummerField =
-      this.tegenonderzoekArtikelAchtForm.controls['bvhVolgnummerField'].value;
+      this.tegenonderzoekArtikelAchtForm.controls[this.bvhVolgnummerFieldValue].value;
     this.goedvolgnummerField =
-      this.tegenonderzoekArtikelAchtForm.controls['goedvolgnummerField'].value;
+      this.tegenonderzoekArtikelAchtForm.controls[this.goedvolgnummerFieldValue].value;
   }
 
   ngAfterViewInit() {
@@ -95,11 +100,11 @@ export class TegenonderzoekArtikelAchtComponent implements OnInit {
     this.methodAddLeadingZerosbvehVolgnummer();
     console.log(this.tegenonderzoekArtikelAchtForm.value);
     this.completeInformation = 'Resultaat: '
-      + this.tegenonderzoekArtikelAchtForm.controls['eightWvwField'].value
+      + this.tegenonderzoekArtikelAchtForm.controls[this.eightWvwFieldValue].value
       + this.underscore
-      + this.tegenonderzoekArtikelAchtForm.controls['eenheidscodeField'].value
+      + this.tegenonderzoekArtikelAchtForm.controls[this.eenheidscodeFieldValue].value
       + this.underscore
-      + this.tegenonderzoekArtikelAchtForm.controls['bvhVolgnummerField'].value
+      + this.tegenonderzoekArtikelAchtForm.controls[this.bvhVolgnummerFieldValue].value;
     // + this.underscore
     // + this.tegenonderzoekArtikelAchtForm.controls['goedvolgnummerField'].value
   }
@@ -113,14 +118,14 @@ export class TegenonderzoekArtikelAchtComponent implements OnInit {
   }
 
   methodAddLeadingZerosbvehVolgnummer() {
-    var variableAddLeadingZerosBvehVolgnummer = this.tegenonderzoekArtikelAchtForm.get('bvhVolgnummerField').setValue(
-      this.addLeadingZerosbvehVolgnummer(this.tegenonderzoekArtikelAchtForm.controls['bvhVolgnummerField'].value));
+    const variableAddLeadingZerosBvehVolgnummer = this.tegenonderzoekArtikelAchtForm.get(this.bvhVolgnummerFieldValue).setValue(
+      this.addLeadingZerosbvehVolgnummer(this.tegenonderzoekArtikelAchtForm.controls[this.bvhVolgnummerFieldValue].value));
 
     return variableAddLeadingZerosBvehVolgnummer;
   }
 
   addLeadingZerosbvehVolgnummer(num: any) {
-    var s = num + '';
+    let s = num + '';
     // if (num.length <= 12) {
     //   s = '20' + num;
     // }
@@ -132,15 +137,15 @@ export class TegenonderzoekArtikelAchtComponent implements OnInit {
 
   focusToInputBvhVolgnummer() {
     this.focusedBvhVolgnummer = !this.focusedBvhVolgnummer;
-    this.tegenonderzoekArtikelAchtForm.controls.bvhVolgnummerField['enable']();
+    this.tegenonderzoekArtikelAchtForm.controls.bvhVolgnummerField[this.enableValue]();
     this.searchElementBvhVolgnummerField.nativeElement.focus();
   }
 
   focusToInputGoedvolgnummer() {
     this.focusedGoedvolgnummer = !this.focusedGoedvolgnummer;
-    this.tegenonderzoekArtikelAchtForm.controls.goedvolgnummerField['enable']();
-    if (this.tegenonderzoekArtikelAchtForm.controls['bvhVolgnummerField'].value.length == this.maxLength) {
-      console.log(this.tegenonderzoekArtikelAchtForm.controls['bvhVolgnummerField'].value);
+    this.tegenonderzoekArtikelAchtForm.controls.goedvolgnummerField[this.enableValue]();
+    if (this.tegenonderzoekArtikelAchtForm.controls[this.bvhVolgnummerFieldValue].value.length == this.maxLength) {
+      console.log(this.tegenonderzoekArtikelAchtForm.controls[this.bvhVolgnummerFieldValue].value);
       this.searchGoedvolgnummerField.nativeElement.focus();
     }
   }

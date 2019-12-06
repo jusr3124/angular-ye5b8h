@@ -11,10 +11,12 @@ export class VisumaanvragenComponent implements OnInit {
 
   visumaanvragenForm: FormGroup;
   visumKwitantieNummerField: FormControl;
+  visumFieldValue = 'visumKwitantieNummerField';
 
-  maxLength: any = 15;
-  zero: number = 0;
+  maxLength = 15;
+  zero = 0;
   completeInformation: string;
+  validPattern = '^[0-9a-zA-Z\-\']+';
 
   constructor() {
     this.visumaanvragenForm = new FormGroup({
@@ -23,29 +25,29 @@ export class VisumaanvragenComponent implements OnInit {
         Validators.required,
         Validators.maxLength(this.maxLength),
         Validators.nullValidator,
-        Validators.pattern('^[0-9a-zA-Z \-\']+'),
+        Validators.pattern(this.validPattern),
       ])
-    })
+    });
   }
 
   ngOnInit() {
     this.visumKwitantieNummerField =
-      this.visumaanvragenForm.controls['visumKwitantieNummerField'].value;
+      this.visumaanvragenForm.controls[this.visumFieldValue].value;
   }
 
   submit() {
     this.completeInformation = 'Resultaat: '
-      + this.visumaanvragenForm.controls['visumKwitantieNummerField'].value;
+      + this.visumaanvragenForm.controls[this.visumFieldValue].value;
   }
 
   methodAddLeadingZeros() {
-    var variableAddLeadingZeros =
-      this.addLeadingZeros(this.visumaanvragenForm.controls['visumKwitantieNummerField'].value);
-    return this.visumaanvragenForm.get('visumKwitantieNummerField').setValue(variableAddLeadingZeros);
+    const variableAddLeadingZeros =
+      this.addLeadingZeros(this.visumaanvragenForm.controls[this.visumFieldValue].value);
+    return this.visumaanvragenForm.get(this.visumFieldValue).setValue(variableAddLeadingZeros);
   }
 
   addLeadingZeros(num: any) {
-    var s = num + '';
+    let s = num + '';
     while (s.length < this.maxLength) {
       s = this.zero + s;
     }
