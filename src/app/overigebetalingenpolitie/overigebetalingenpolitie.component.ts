@@ -15,13 +15,16 @@ export class OverigebetalingenpolitieComponent implements OnInit, AfterViewInit 
   bvhVolgnummerField: FormControl;
   eenheidscodeField: FormControl;
 
-  focused: boolean = false;
-  isDisabled: boolean = true;
-  zero: number = 0;
-  maxLength: number = 14;
-  underscore: string = '_';
+  focused = false;
+  isDisabled = true;
+  zero = 0;
+  maxLength = 14;
+  underscore = '_';
   completeInformation: string;
-
+  bbFieldValue = 'bbField';
+  eenheidscodeFieldValue = 'eenheidscodeField';
+  bvhVolgnummerFieldValue = 'bvhVolgnummerField';
+  enableValue = 'enable';
 
   eenheidscodeList = [
     //   {code:'PL0100',region:'Noord-Nederland'},
@@ -67,11 +70,11 @@ export class OverigebetalingenpolitieComponent implements OnInit, AfterViewInit 
 
   ngOnInit() {
     this.bbField =
-      this.bestuurlijkeBoetesForm.controls['bbField'].value;
+      this.bestuurlijkeBoetesForm.controls[this.bbFieldValue].value;
     this.eenheidscodeField =
-      this.bestuurlijkeBoetesForm.controls['eenheidscodeField'].value;
+      this.bestuurlijkeBoetesForm.controls[this.eenheidscodeFieldValue].value;
     this.bvhVolgnummerField =
-      this.bestuurlijkeBoetesForm.controls['bvhVolgnummerField'].value;
+      this.bestuurlijkeBoetesForm.controls[this.bvhVolgnummerFieldValue].value;
   }
 
   ngAfterViewInit() {
@@ -84,11 +87,11 @@ export class OverigebetalingenpolitieComponent implements OnInit, AfterViewInit 
     this.methodAddLeadingZerosbvehVolgnummer();
     console.log(this.bestuurlijkeBoetesForm.value);
     this.completeInformation = 'Resultaat: '
-      + this.bestuurlijkeBoetesForm.controls['bbField'].value
+      + this.bestuurlijkeBoetesForm.controls[this.bbFieldValue].value
       + this.underscore
-      + this.bestuurlijkeBoetesForm.controls['eenheidscodeField'].value
+      + this.bestuurlijkeBoetesForm.controls[this.eenheidscodeFieldValue].value
       + this.underscore
-      + this.bestuurlijkeBoetesForm.controls['bvhVolgnummerField'].value
+      + this.bestuurlijkeBoetesForm.controls[this.bvhVolgnummerFieldValue].value
   }
 
   numberOnly(event) {
@@ -101,8 +104,8 @@ export class OverigebetalingenpolitieComponent implements OnInit, AfterViewInit 
 
   methodAddLeadingZerosbvehVolgnummer() {
     var variableAddLeadingZerosBvehVolgnummer =
-      this.addLeadingZerosbvehVolgnummer(this.bestuurlijkeBoetesForm.controls['bvhVolgnummerField'].value);
-    return this.bestuurlijkeBoetesForm.get('bvhVolgnummerField').setValue(variableAddLeadingZerosBvehVolgnummer);
+      this.addLeadingZerosbvehVolgnummer(this.bestuurlijkeBoetesForm.controls[this.bvhVolgnummerFieldValue].value);
+    return this.bestuurlijkeBoetesForm.get(this.bvhVolgnummerFieldValue).setValue(variableAddLeadingZerosBvehVolgnummer);
   }
 
   addLeadingZerosbvehVolgnummer(num: any) {
@@ -118,7 +121,7 @@ export class OverigebetalingenpolitieComponent implements OnInit, AfterViewInit 
 
   focusToNextInput() {
     this.focused = !this.focused;
-    this.bestuurlijkeBoetesForm.controls.bvhVolgnummerField['enable']();
+    this.bestuurlijkeBoetesForm.controls.bvhVolgnummerField[this.enableValue]();
     this.searchElement.nativeElement.focus();
   }
 }
